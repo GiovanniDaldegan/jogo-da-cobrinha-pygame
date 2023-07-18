@@ -1,9 +1,11 @@
 import pygame
-# from ..scripts.main import SETTINGS
+from settings import SETTINGS, COLORS
 
 
 def render_scene(SCREEN, layers):
 	SCREEN.fill("#000000")
+
+	# for j in range()
 
 	for layer in layers:
 		for obj in layer:
@@ -22,6 +24,7 @@ def render_scene(SCREEN, layers):
 				for l in range(len(obj.lines)):
 					SCREEN.blit(obj.lines[l], obj.rects[l])
 
+			#elif obj_class == "Snake":
 
 
 	pygame.display.update()
