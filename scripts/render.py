@@ -1,5 +1,4 @@
 import pygame
-from settings import SETTINGS, COLORS
 
 
 def render_scene(SCREEN, layers):
@@ -23,6 +22,9 @@ def render_scene(SCREEN, layers):
 			elif obj_class == "Text":
 				for l in range(len(obj.lines)):
 					SCREEN.blit(obj.lines[l], obj.rects[l])
+
+			elif obj_class == "Circle":
+				pygame.draw.circle(SCREEN, obj.color, obj.pos, obj.radius)
 
 			#elif obj_class == "Snake":
 

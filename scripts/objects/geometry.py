@@ -14,6 +14,14 @@ class Rectangle():
 		self.rect = pygame.Rect(topleft, size)
 		self.width = width
 
+class Circle():
+	def __init__(self, color, pos, radius):
+		
+		self.color = color
+		self.pos = pos
+		self.radius = radius
+		# self.width = width
+
 # INCOMPLETO
 class Polygon():
 	def __init__(self, vertices, color, pos=(0,0)):

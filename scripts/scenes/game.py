@@ -1,10 +1,15 @@
 from settings import SETTINGS, COLORS
-from objects import geometry, text
+from objects import geometry, text, snake
 from fonts import initializeFonts
+from input import handeInput
 
-def setup(layers):
-	_fonts = initializeFonts()
 
+player = snake.Snake(SETTINGS["GRID_SIZE"], SETTINGS["UNIT_SIZE"])
+
+def setup(source_path, layers):
+	_fonts = initializeFonts(source_path)
+
+	# TODO: garantir que a grade tenha, pelo menos, dimensões 3x3
 	# Grid
 	grid_size = SETTINGS["GRID_SIZE"]
 	unit_size = SETTINGS["UNIT_SIZE"]
@@ -21,7 +26,8 @@ def setup(layers):
 	# Borders
 	r0 = geometry.Rectangle(COLORS["light_gray"], (46, 196), (907, 457), 6)
 
-	layers.append([title, r0])
+	layers[0].append(title)
+	layers[0].append(r0)
 
 	for i in range(int(grid_size[0] / unit_size) - 1):
 		layers[0].append(geometry.Line(COLORS["light_gray"], (grid_origin[0] + (1 + i) * unit_size, grid_origin[1]), (grid_origin[0] + (1 + i) * unit_size, grid_origin[1] + grid_size[1]), 1))
@@ -29,3 +35,25 @@ def setup(layers):
 	for j in range(int(grid_size[1] / unit_size) - 1):
 		layers[0].append(geometry.Line(COLORS["light_gray"], (grid_origin[0], grid_origin[1] + (1 + j) * unit_size), (grid_origin[0] + grid_size[0], grid_origin[1] + (1 + j) * unit_size), 1))
 
+
+def gameLoop(base_path, events, layers):
+	#layers[1] = []
+
+	# for event in events:
+	# 	handeInput(event, player)
+
+	player.update()
+
+	print(f"\n[ {player.segments[0][0]}, ", end="")
+	for i in range(len(player.segments)):
+
+		print(f"{player.segments[i][1]}", end=" ]")
+
+		layers[1].append(geometry.Circle(COLORS["pink"],
+				(
+					SETTINGS["GRID_ORIGIN"][0] + player.segments[i][1][0] * SETTINGS["UNIT_SIZE"],
+					SETTINGS["GRID_ORIGIN"][1] + player.segments[i][1][1] * SETTINGS["UNIT_SIZE"]
+				),
+				4
+			)
+		)
