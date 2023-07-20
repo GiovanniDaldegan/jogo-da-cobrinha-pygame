@@ -1,6 +1,6 @@
 import sys, os, pygame
 
-import render
+import render, sceneManager
 from settings import SETTINGS
 from scenes import game, menu
 
@@ -14,31 +14,30 @@ SCREEN = pygame.display.set_mode(SETTINGS["SCREEN_SIZE"])
 pygame.display.set_caption("Jogo da Cobrinha")
 clock = pygame.time.Clock()
 
-
-# Layers: [scene setup, snake, layer2, layer3, ...]
+## Layers: [scene setup, snake, layer2, layer3, ...]
 layers = [[], []]
 
 
 def main():
 	run = True
 
-	# TODO: scene manager
-	game.setup(base_path, layers)
 
 	while run:
 
 		events = pygame.event.get()
 
 		for event in events:
-			if event.type == pygame.QUIT: run = False,
+			if event.type == pygame.QUIT: run = False
 
+		sceneManager.runState(base_path, events, layers)
 
-		render.render_scene(SCREEN, layers)
-		game.gameLoop(base_path, events, layers)
+		render.renderScene(SCREEN, layers)
+		# game.gameLoop(base_path, events, layers)
 
 		clock.tick(SETTINGS["FPS"])
 
 	pygame.quit()
 	sys.exit()
+
 
 if __name__ == "__main__": main()

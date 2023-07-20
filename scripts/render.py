@@ -1,7 +1,7 @@
 import pygame
 
 
-def render_scene(SCREEN, layers):
+def renderScene(SCREEN, layers):
 	SCREEN.fill("#000000")
 
 	# for j in range()
@@ -20,11 +20,17 @@ def render_scene(SCREEN, layers):
 				pygame.draw.rect(SCREEN, obj.color, obj.rect, obj.width)
 
 			elif obj_class == "Text":
-				for l in range(len(obj.lines)):
-					SCREEN.blit(obj.lines[l], obj.rects[l])
+				for i in range(len(obj.lines)):
+					SCREEN.blit(obj.lines[i], obj.rects[i])
 
 			elif obj_class == "Circle":
 				pygame.draw.circle(SCREEN, obj.color, obj.pos, obj.radius)
+
+			elif obj_class == "Button":
+				pygame.draw.rect(SCREEN, obj.rectangle.color, obj.rectangle.rect, obj.rectangle.width)
+
+				for i in range(len(obj.text.lines)):
+					SCREEN.blit(obj.text.lines[i], obj.text.rects[i])
 
 			#elif obj_class == "Snake":
 

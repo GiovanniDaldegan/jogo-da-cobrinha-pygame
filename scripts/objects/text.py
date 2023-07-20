@@ -1,10 +1,9 @@
 class Text():
 	def __init__(self, lines):
-		super().__init__()
-		
+
 		self.lines = []
 		self.rects = []
 
-		for l in range(len(lines)):
-			self.lines.append(lines[l]["font"].render(lines[l]["content"], False, lines[l]["color"]))
-			self.rects.append(self.lines[l].get_rect(center = lines[l]["pos"]))
+		for i in range(len(lines)):
+			self.lines.append(lines[i]["font"].render(lines[i]["content"], False, lines[i]["color"]))
+			self.rects.append(self.lines[i].get_rect(center = lines[i]["pos"]))

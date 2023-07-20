@@ -8,16 +8,16 @@ class Snake():
 	def __init__(self, grid_size, unit_size):
 		grid_units = (int(grid_size[0] / unit_size), int(grid_size[1] / unit_size))
 
-		self.size = 2
+		self.size = 3
 		self.direction = [0, 0, 0, 0]
-		randIndex = randint(0, 3)
+		rand_index = randint(0, 3)
 
-		if randIndex <= 1:
-			self.direction[randIndex] = oneWayOrAnother()
-			self.direction[randIndex + 2] = - self.direction[randIndex]
-		elif randIndex >= 2:
-			self.direction[randIndex] = oneWayOrAnother()
-			self.direction[randIndex - 2] = - self.direction[randIndex]
+		if rand_index <= 1:
+			self.direction[rand_index] = oneWayOrAnother()
+			self.direction[rand_index + 2] = - self.direction[rand_index]
+		elif rand_index >= 2:
+			self.direction[rand_index] = oneWayOrAnother()
+			self.direction[rand_index - 2] = - self.direction[rand_index]
 
 		self.head = [
 			self.direction,

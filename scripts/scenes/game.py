@@ -18,8 +18,8 @@ def setup(source_path, layers):
 	# Title
 	title = text.Text(
 		(
-			{ "font": _fonts["font1"], "content":"JOGO DA", "pos": (504, 50), "color": COLORS["light_gray"] },
-			{ "font": _fonts["font0"], "content": "COBRINHA", "pos": (504, 100), "color": COLORS["light_gray"] }
+			{ "font": _fonts["font2"], "content":"JOGO DA", "pos": (504, 50), "color": COLORS["light_gray"] },
+			{ "font": _fonts["font1"], "content": "COBRINHA", "pos": (504, 100), "color": COLORS["light_gray"] }
 		)
 	)
 
@@ -39,10 +39,10 @@ def setup(source_path, layers):
 def gameLoop(base_path, events, layers):
 	#layers[1] = []
 
-	# for event in events:
-	# 	handeInput(event, player)
+	_input = handeInput(events)
 
-	player.update()
+
+	# player.update()
 
 	print(f"\n[ {player.segments[0][0]}, ", end="")
 	for i in range(len(player.segments)):
