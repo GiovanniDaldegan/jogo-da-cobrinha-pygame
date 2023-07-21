@@ -1,10 +1,10 @@
 import pygame
 
-def handeInput(events):
+def handleInput(events):
 
 	for event in events:
 		if event.type == pygame.KEYDOWN:
-			return str(event.key)
+			return event.key
 
 		# if event.type == pygame.MOUSEBUTTONDOWN:
 		# 	if rect.collidepoint(event.pos):

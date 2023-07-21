@@ -29,7 +29,7 @@ class Snake():
 		self.segments = [self.head]
 		self.addSegment()
 
-		print(self.segments, end="\n\n")
+		# print(self.segments, end="\n\n")
 
 
 	def update(self):

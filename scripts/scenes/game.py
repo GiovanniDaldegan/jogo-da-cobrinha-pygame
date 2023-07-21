@@ -1,12 +1,13 @@
 from settings import SETTINGS, COLORS
 from objects import geometry, text, snake
 from fonts import initializeFonts
-from input import handeInput
+from input import handleInput
 
-
-player = snake.Snake(SETTINGS["GRID_SIZE"], SETTINGS["UNIT_SIZE"])
 
 def setup(source_path, layers):
+	# layers = [[], []]
+	print("CARALHO")
+
 	_fonts = initializeFonts(source_path)
 
 	# TODO: garantir que a grade tenha, pelo menos, dimensões 3x3
@@ -39,11 +40,11 @@ def setup(source_path, layers):
 def gameLoop(base_path, events, layers):
 	#layers[1] = []
 
-	_input = handeInput(events)
+	_input = handleInput(events)
 
 
 	# player.update()
-
+	"""
 	print(f"\n[ {player.segments[0][0]}, ", end="")
 	for i in range(len(player.segments)):
 
@@ -56,4 +57,4 @@ def gameLoop(base_path, events, layers):
 				),
 				4
 			)
-		)
+		)"""
