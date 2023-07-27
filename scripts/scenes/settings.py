@@ -16,10 +16,10 @@ class SettingsScene():
 		] )
 
 		back_button = button.Button(
-			(50, 20),
+			(70, 50),
 			text.Text(
 				[ { "font": _fonts["font3"], "content": "Voltar", "pos": (2, 2), "color": COLORS["light_gray"] } ],
-			), geometry.Rectangle(COLORS["light_gray"], (0, 0), (30, 20), 3), "switch 0"
+			), geometry.Rectangle(COLORS["light_gray"], (0, 0), (90, 40), 3), "switch 0"
 		)
 
 		# TODO: slider
@@ -35,3 +35,5 @@ class SettingsScene():
 		layers[0].append(title)
 		layers[0].append(volume_text)
 		layers[0].append(theme_text)
+
+		layers[1].append(back_button)

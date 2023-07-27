@@ -32,7 +32,9 @@ def renderScene(SCREEN, layers):
 				for i in range(len(obj.text.lines)):
 					SCREEN.blit(obj.text.lines[i], obj.text.rects[i])
 
-			#elif obj_class == "Snake":
+			elif obj_class == "Grid":
+				for i in obj.lines:
+					pygame.draw.line(SCREEN, i.color, i.start, i.end, i.width)
 
 
 	pygame.display.update()
