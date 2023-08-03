@@ -6,7 +6,7 @@ from settings import SETTINGS
 
 # Game setup
 base_path = os.getcwd()
-source_path = os.path.join(base_path, "\\source")
+source_path = os.path.join(base_path, "source")
 pygame.init()
 
 SCREEN = pygame.display.set_mode(SETTINGS["SCREEN_SIZE"])
@@ -30,7 +30,7 @@ def main():
 			if event.type == pygame.QUIT:
 				scene_manager.run = False
 
-		scene_manager.runState(base_path, events, layers)
+		scene_manager.runState(source_path, events, layers)
 
 		render.renderScene(SCREEN, layers)
 

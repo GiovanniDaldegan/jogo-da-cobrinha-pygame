@@ -26,7 +26,7 @@ class SceneManager():
 		elif self.current_state == self.scenes[3]:
 			self.game_scene.gameLoop(base_path, events, layers)
 		
-		interface.handleInterface(base_path, self, layers)
+		interface.handleInterface(events, base_path, self, layers)
 
 	def setScene(self, source_path, layers, state_index):
 		if state_index == -1:
