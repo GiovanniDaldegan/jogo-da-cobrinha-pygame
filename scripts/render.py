@@ -11,10 +11,10 @@ def renderScene(SCREEN, layers):
 		for obj in layer:
 			obj_class = type(obj).__name__
 
-			if obj_class == "Surface":
-				SCREEN.blit(obj, (0, 0))
+			# if obj_class == "Surface":
+			# 	SCREEN.blit(obj, (0, 0))
 			
-			elif obj_class == "Sprite":
+			if obj_class == "Sprite":
 				SCREEN.blit(obj.surface, obj.rect.topleft)
 
 			elif obj_class == "Line":
@@ -54,7 +54,7 @@ def renderScene(SCREEN, layers):
 
 			elif obj_class == "Snake":
 				for i in obj.segments:
-					SCREEN.blit(pygame.transform.rotate(obj.sprites[i.sprite], 90 * i.rotation),
+					SCREEN.blit(pygame.transform.rotate(obj.sprites["straight"], 0),#i.sprite | 90 * i.rotation),
 		 				(
 							SETTINGS["GRID_ORIGIN"][0] + i.pos[0] * SETTINGS["UNIT_SIZE"],
 							SETTINGS["GRID_ORIGIN"][1] + i.pos[1] * SETTINGS["UNIT_SIZE"]

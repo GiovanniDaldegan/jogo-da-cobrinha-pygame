@@ -62,7 +62,7 @@ class GameScene():
 		self.items = []
 
 		self.snake = snake.Snake(grid_origin, grid_size, unit_size, self.sprites["snake"])
-		self.setSnakeSprites()
+		# self.setSnakeSprites()
 
 
 		layers[0].append(title)
@@ -73,6 +73,7 @@ class GameScene():
 
 
 	def gameLoop(self, source_path, events, layers):
+		slow_frame = False
 		_input = handleInput(events)
 
 		this_tick = pygame.time.get_ticks()
@@ -81,34 +82,21 @@ class GameScene():
 			if event.type == self.acceleration_timer:
 				self.game_speed += 0.5
 
-			# Input
-			if event.type == pygame.KEYDOWN:
-
-				# Snake movement
-				new_direction = None
-				if event.key == pygame.K_RIGHT:
-					new_direction = [0, 2]
-				elif event.key == pygame.K_DOWN:
-					new_direction = [1, 3]
-				elif event.key == pygame.K_LEFT:
-					new_direction = [2, 0]
-				elif event.key == pygame.K_UP:
-					new_direction = [3, 1]
-				
-				if new_direction:
-					self.snake.segments[0].direction = new_direction
-
 
 		# Game slow fps update
 		if ((this_tick - self.last_frame) * self.game_speed) / 1000 >= 1:
 			self.last_frame = this_tick
+			slow_frame = True
+			
 			layers[2].clear()
 
 			# Snake
-			self.snake.update()
 			layers[2].append(self.snake)
 
-			self.setSnakeSprites()
+			# self.setSnakeSprites()
+
+		self.snake.update(_input, slow_frame)
+
 
 
 		# Items
@@ -129,38 +117,3 @@ class GameScene():
 
 
 		# if self.snake.lives == 0: pygame.time.set_timer(self.acceleration_timer, 0)
-
-
-	def setSnakeSprites(self):
-		for i in range(len(self.snake.segments)):
-			self.setSegmentRotation(i)
-
-			if i == 0:
-				self.snake.segments[0].sprite = "head"
-
-			elif i == len(self.snake.segments) - 1:
-				self.snake.segments[-1].sprite = "tail"
-
-			else:
-				self.snake.segments[i].sprite = "straight"
-		
-
-	def setSegmentRotation(self, i):
-		direction_difference = abs(self.snake.segments[i].direction[0] - self.snake.segments[i].direction[1])
-		direction_sum = self.snake.segments[i].direction[0] + self.snake.segments[i].direction[1]
-
-		if direction_difference == 3:
-			rotation = 1
-
-		elif direction_difference == 2:
-			rotation = range(0, 4)[- self.snake.segments[i].direction[0]]
-
-		elif direction_difference == 1:
-			if direction_sum == 1:
-				rotation = 0
-			if direction_sum == 3:
-				rotation = 3
-			if direction_sum == 5:
-				rotation = 2
-
-		self.snake.segments[i].rotation = rotation
