@@ -1,7 +1,7 @@
 import pygame
 
 class Line():
-	def __init__(self, color, start, end, width):
+	def __init__(self, color, start, end, width=2):
 		self.color = color
 		self.start = start
 		self.end = end

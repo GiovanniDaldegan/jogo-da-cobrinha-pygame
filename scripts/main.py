@@ -20,7 +20,7 @@ current_state = None
 
 def main():
 
-	scene_manager = sceneManager.SceneManager()
+	scene_manager = sceneManager.SceneManager(base_path)
 
 	while scene_manager.run:
 

@@ -17,13 +17,16 @@ def loadSpriteSheet(source_path, file_name, unit_size, tiles=(1, 1), color_key=(
 	return sprites
 
 def loadSprite(source_path, file_name, color_key=(255, 255, 255), additional_path=""):
-	return pygame.image.load(os.path.join(source_path, "graphics", additional_path, file_name)).convert()
+	surface = pygame.image.load(os.path.join(source_path, "graphics", additional_path, file_name)).convert()
+	if color_key != ():
+		surface.set_colorkey(color_key)
+	return surface
 
-def loadFonts(source_path, font_names, sizes):
+def loadFonts(source_path, requests):
 	fonts = []
-	
-	for i in range(len(font_names)):
-		fonts.append(pygame.font.Font(os.path.join(source_path, "fonts", font_names[i]), sizes[i]))
+
+	for i in requests:
+		fonts.append(pygame.font.Font(os.path.join(source_path, "fonts", i[0]), i[1]))
 
 	return fonts
 

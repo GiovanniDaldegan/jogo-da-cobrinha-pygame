@@ -1,7 +1,7 @@
 import pygame
 
 
-def handleInterface(events, base_path, scene_manager, layers):
+def handleInterface(events, source_path, scene_manager, layers):
 	if not pygame.mouse.get_pressed()[0]: return
 
 	mouse_pos = pygame.mouse.get_pos()
@@ -14,7 +14,7 @@ def handleInterface(events, base_path, scene_manager, layers):
 				function = obj.function.split()
 
 				if function[0] == "switch":
-					scene_manager.setScene(base_path, layers, int(function[1]))
+					scene_manager.setScene(source_path, layers, int(function[1]))
 
 		elif obj_class == "Toggle":
 			if pygame.MOUSEBUTTONDOWN in [event.type for event in events] and obj.rect.collidepoint(mouse_pos):

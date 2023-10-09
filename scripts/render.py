@@ -41,6 +41,13 @@ def renderScene(SCREEN, layers):
 				for i in range(len(obj.text.lines)):
 					SCREEN.blit(obj.text.lines[i], obj.text.rects[i])
 
+			elif obj_class == "ButtonList":
+				for i in obj.buttons:
+					pygame.draw.rect(SCREEN, i.rectangle.color, i.rectangle.rect, i.rectangle.width)
+
+					for j in range(len(i.text.lines)):
+						SCREEN.blit(i.text.lines[j], i.text.rects[j])
+
 			elif obj_class == "Toggle":
 				if obj.active:
 					SCREEN.blit(obj.sprites["true"], obj.rect)
@@ -54,10 +61,6 @@ def renderScene(SCREEN, layers):
 
 			elif obj_class == "Snake":
 				for i in obj.segments:
-					SCREEN.blit(pygame.transform.rotate(obj.sprites["straight"], 0),#i.sprite | 90 * i.rotation),
-		 				(
-							SETTINGS["GRID_ORIGIN"][0] + i.pos[0] * SETTINGS["UNIT_SIZE"],
-							SETTINGS["GRID_ORIGIN"][1] + i.pos[1] * SETTINGS["UNIT_SIZE"]
-						))
+					SCREEN.blit(pygame.transform.rotate(obj.sprites["straight"], 0), i.pos) #i.sprite | 90 * i.rotation),
 
 	pygame.display.update()
