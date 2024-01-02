@@ -1,16 +1,31 @@
-import loadManager
-from objects import geometry, text, button, toggle, slider
+from pygame import Vector2
+
 from settings import SETTINGS, COLORS
+import loadManager
+
+from objects import geometry, text
+from objects.interfaceElements import Toggle, Button, Slider
 
 
 class SettingsScene():
-	def __init__(self, source_path, layers, fonts):
+	"""
+	Cena de ajuste de configurações. Apresenta todas
+	as configurações alteráveis do jogo e permite ao
+	jogador alterá-las por meio da interface.
+
+    Argumentos:
+    ---
+	- layers: camadas de renderização do jogo;
+	- fonts: fontes disponíveis.
+    """
+
+	def __init__(self, layers, fonts):
 		sprites = {
-			"toggle": loadManager.loadSpriteSheet(source_path, "toggle.png", 30, (1, 2)),
+			"toggle": loadManager.loadSpriteSheet("toggle.png", 30, (1, 2)),
 			"slider": [
-				loadManager.loadSprite(source_path, "slider_background.png", color_key=(), additional_path="slider"),
-				loadManager.loadSprite(source_path, "slider_fill.png", color_key=(), additional_path="slider"),
-				loadManager.loadSprite(source_path, "slider_handle.png", color_key=(), additional_path="slider")
+				loadManager.loadSprite("slider_background.png", color_key=(), folder_name="slider"),
+				loadManager.loadSprite("slider_fill.png", color_key=(), folder_name="slider"),
+				loadManager.loadSprite("slider_handle.png", color_key=(), folder_name="slider")
 			]
 		}
 
@@ -24,12 +39,12 @@ class SettingsScene():
 		] )
 
 
-		toggle_mute = toggle.Toggle((230, 365), False, sprites["toggle"], "")
+		toggle_mute = Toggle((230, 365), False, sprites["toggle"], "")
 
-		volume_slider = slider.Slider((600, 300), sprites["slider"], "set volume")
+		volume_slider = Slider((600, 300), sprites["slider"], "set volume")
 
-		back_button = button.Button(
-			(70, 50),
+		back_button = Button(
+			Vector2(70, 50),
 			text.Text(
 				[ { "font": fonts[3], "content": "Voltar", "pos": (0, -1), "color": COLORS["light_gray"] } ],
 			), geometry.Rectangle(COLORS["light_gray"], (0, 0), (90, 40), 3), "switch 0"

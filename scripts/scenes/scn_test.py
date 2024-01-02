@@ -1,48 +1,59 @@
-import pygame
+from pygame import Vector2, K_ESCAPE
 
 from settings import SETTINGS, COLORS
 from inputHandler import handleInput
-from objects import text, geometry, button, buttonList
+
+from objects import text, geometry
+from objects.interfaceElements import Button, ButtonList
 
 class Test():
-    def __init__(self, source_path, layers, fonts):
+	"""
+	ISTO É UM TESTE.
 
-        mamaco3 = button.Button(
-            (0, 0),
-            text.Text(
-                [ { "font": fonts[2], "content": "Mamaco", "pos": (0, 0), "color": COLORS["light_gray"] } ]
-            ),
-            geometry.Rectangle(COLORS["light_gray"], (0, 0), (120, 50), 3),
-            "samba 2 3"
-        )
+    Argumentos:
+    ---
+	- layers: camadas de renderização do jogo;
+	- fonts: fontes disponíveis.
+    """
 
-        mamaco1 = button.Button(
-            (0, 0),
-            text.Text(
-                [ { "font": fonts[2], "content": "Mamaco", "pos": (0, 0), "color": COLORS["light_gray"] } ]
-            ),
-            geometry.Rectangle(COLORS["light_gray"], (0, 0), (120, 50), 3),
-            "samba 2 3"
-        )
+	def __init__(self, layers, fonts):
 
-        mamaco2 = button.Button(
-            (0, 0),
-            text.Text(
-                [ { "font": fonts[2], "content": "Mamaco", "pos": (0, 0), "color": COLORS["light_gray"] } ]
-            ),
-            geometry.Rectangle(COLORS["light_gray"], (0, 0), (120, 50), 3),
-            "samba 2 3"
-        )
+		mamaco3 = Button(
+			Vector2(0, 0),
+			text.Text(
+				[ { "font": fonts[2], "content": "Mamaco", "pos": Vector2(0, 0), "color": COLORS["light_gray"] } ]
+			),
+			geometry.Rectangle(COLORS["light_gray"], (0, 0), (120, 50), 3),
+			"samba 2 3"
+		)
 
-        button_menu = buttonList.ButtonList((500, 500), [mamaco1, mamaco2, mamaco3], 0, 10)
+		mamaco1 = Button(
+			Vector2(0, 0),
+			text.Text(
+				[ { "font": fonts[2], "content": "Mamaco", "pos": Vector2(0, 0), "color": COLORS["light_gray"] } ]
+			),
+			geometry.Rectangle(COLORS["light_gray"], (0, 0), (120, 50), 3),
+			"samba 2 3"
+		)
 
-        self.fixed_objects = [button_menu]
+		mamaco2 = Button(
+			Vector2(0, 0),
+			text.Text(
+				[ { "font": fonts[2], "content": "Mamaco", "pos": Vector2(0, 0), "color": COLORS["light_gray"] } ]
+			),
+			geometry.Rectangle(COLORS["light_gray"], (0, 0), (120, 50), 3),
+			"samba 2 3"
+		)
 
-        for i in self.fixed_objects: layers[0].append(i)
+		button_menu = ButtonList(Vector2(500, 500), [mamaco1, mamaco2, mamaco3], 0, 10)
+
+		self.fixed_objects = []#[button_menu]
+
+		for i in self.fixed_objects: layers[0].append(i)
 
 
-    def testLoop(self, source_path, events, layers, scene_manager):
-        _input = handleInput(events)
+	def testLoop(self, events, layers, scene_manager):
+		_input = handleInput(events)
 
-        if pygame.K_ESCAPE in _input["KEYSDOWN"]:
-            scene_manager.setScene(source_path, layers, 0)
+		if K_ESCAPE in _input["KEYSDOWN"]:
+			scene_manager.setScene(layers, 0)

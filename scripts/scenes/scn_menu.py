@@ -1,46 +1,59 @@
-import pygame, loadManager
+from pygame import Vector2, K_ESCAPE
+
 from settings import SETTINGS, COLORS
-from objects import geometry, text, button, buttonList
 from inputHandler import handleInput
+
+from objects import geometry, text
+from objects.interfaceElements import Button
+
 
 
 class MenuScene():
-	def __init__(self, source_path, layers, fonts):
+	"""
+	Cena de menu. Mostra o título do jogo e permite
+	o acesso de todas as demais cenas.
 
+    Argumentos:
+    ---
+	- layers: camadas de renderização do jogo;
+	- fonts: fontes disponíveis.
+    """
+
+	def __init__(self, layers, fonts):
 		# Scene objects
 		title = text.Text((
-			{ "font": fonts[1], "content": "JOGO DA", "pos": (500, 200), "color": COLORS["light_gray"] },
-			{ "font": fonts[0], "content": "COBRINHA", "pos": (500, 290), "color": COLORS["light_gray"] }
+			{ "font": fonts[1], "content": "JOGO DA", "pos": Vector2(500, 200), "color": COLORS["light_gray"] },
+			{ "font": fonts[0], "content": "COBRINHA", "pos": Vector2(500, 290), "color": COLORS["light_gray"] }
 		))
 
-		play_button = button.Button(
-			(300, 500),
+		play_button = Button(
+			Vector2(300, 500),
 			text.Text(
-				[ { "font": fonts[2], "content": "Jogar", "pos": (0, -2), "color": COLORS["light_gray"] } ]
+				[ { "font": fonts[2], "content": "Jogar", "pos": Vector2(0, -2), "color": COLORS["light_gray"] } ]
 			),
 			geometry.Rectangle(COLORS["light_gray"], (0, 0), (130, 50), 3), "switch 3"
 		)
 
-		config_button = button.Button(
-			(460, 500),
+		config_button = Button(
+			Vector2(460, 500),
 			text.Text(
-				[ { "font": fonts[2], "content": "Configs", "pos": (0, -2), "color": COLORS["light_gray"] } ]
+				[ { "font": fonts[2], "content": "Configs", "pos": Vector2(0, -2), "color": COLORS["light_gray"] } ]
 			),
 			geometry.Rectangle(COLORS["light_gray"], (0, 0), (160, 50), 3), "switch 1"
 		)
 
-		store_button = button.Button(
-			(600, 500),
+		store_button = Button(
+			Vector2(600, 500),
 			text.Text(
-				[ { "font": fonts[2], "content": "Loja", "pos": (0, -2), "color": COLORS["light_gray"] } ]
+				[ { "font": fonts[2], "content": "Loja", "pos": Vector2(0, -2), "color": COLORS["light_gray"] } ]
 			),
 			geometry.Rectangle(COLORS["light_gray"], (0, 0), (100, 50), 3), "switch 2"
 		)
 
-		exit_button = button.Button(
-			(720, 500),
+		exit_button = Button(
+			Vector2(720, 500),
 			text.Text(
-				[ { "font": fonts[2], "content": "Sair", "pos": (0, 0), "color": COLORS["light_gray"] } ]
+				[ { "font": fonts[2], "content": "Sair", "pos": Vector2(0, 0), "color": COLORS["light_gray"] } ]
 			),
 			geometry.Rectangle(COLORS["light_gray"], (0, 0), (100, 50), 3), "switch -1"
 		)
@@ -49,8 +62,8 @@ class MenuScene():
 		layers[1] = [play_button, config_button, store_button, exit_button]
 
 
-	def menuLoop(self, source_path, events, layers, scene_manager):
+	def menuLoop(self, events, layers, scene_manager):
 		_input = handleInput(events)
 
-		if pygame.K_ESCAPE in _input["KEYSDOWN"]:
-			scene_manager.setScene(source_path, layers, 4)
+		if K_ESCAPE in _input["KEYSDOWN"]:
+			scene_manager.setScene(layers, 4)

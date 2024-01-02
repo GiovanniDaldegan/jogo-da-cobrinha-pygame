@@ -1,14 +1,28 @@
-import os, pygame
+import os
+from pygame import image, font, Surface, color
 
+from settings import SETTINGS
 
-def loadSpriteSheet(source_path, file_name, unit_size, tiles=(1, 1), color_key=(255, 255, 255), additional_path=""):
-	original = pygame.image.load(os.path.join(source_path, "graphics", additional_path, file_name)).convert()
+def loadSpriteSheet(file_name:str, unit_size, tiles:list[int]=[1, 1], color_key:color.Color=(255, 255, 255, 255), folder_name=""):
+	"""
+	Carrega sprites diferentes de um mesmo arquivo.
+	Todas são quadradas e têm o mesmo comprimento.
+
+    Argumentos:
+    ---
+	- flie_name: nome do arquivo;
+	- tiles: nº de linhas e nº de colunas, respect.;
+	- color_key: cor do fundo;
+	- folder_name: nome da pasta do arquivo.
+    """
+
+	original = image.load(os.path.join(SETTINGS["SOURCE_DIR"], "graphics", folder_name, file_name)).convert()
 	sprites = []
 	sprite_index = 0
 
 	for i in range(tiles[0]):
 		for j in range(tiles[1]):
-			sprites.append(pygame.Surface((unit_size, unit_size)))
+			sprites.append(Surface((unit_size, unit_size)))
 			sprites[sprite_index].blit(original, (0, 0), (j * unit_size, i * unit_size, unit_size, unit_size))
 			sprites[sprite_index].set_colorkey(color_key)
 			sprites[sprite_index].convert()
@@ -16,18 +30,36 @@ def loadSpriteSheet(source_path, file_name, unit_size, tiles=(1, 1), color_key=(
 
 	return sprites
 
-def loadSprite(source_path, file_name, color_key=(255, 255, 255), additional_path=""):
-	surface = pygame.image.load(os.path.join(source_path, "graphics", additional_path, file_name)).convert()
+def loadSprite(file_name, color_key:color.Color=(255, 255, 255, 255), folder_name=""):
+	"""
+	Carrega uma única sprite.
+
+    Argumentos:
+    ---
+	- flie_name: nome do arquivo;
+	- color_key: cor do fundo;
+	- folder_name: nome da pasta do arquivo.
+	"""
+
+	surface = image.load(os.path.join(SETTINGS["SOURCE_DIR"], "graphics", folder_name, file_name)).convert()
 	if color_key != ():
 		surface.set_colorkey(color_key)
 	return surface
 
-def loadFonts(source_path, requests):
+def loadFonts(requests):
+	"""
+	Carrega as fontes requeridas.
+
+    Argumentos:
+    ---
+	- *requests: fontes a carregar.
+    """
+
 	fonts = []
 
 	for i in requests:
-		fonts.append(pygame.font.Font(os.path.join(source_path, "fonts", i[0]), i[1]))
+		fonts.append(font.Font(os.path.join(SETTINGS["SOURCE_DIR"], "fonts", i[0]), i[1]))
 
 	return fonts
 
-# def loadFont(source_path, font_name, ):
+# def loadFont(font_name, ):

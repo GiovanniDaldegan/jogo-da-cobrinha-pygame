@@ -1,5 +1,12 @@
 class Text():
-	def __init__(self, lines):
+	"""
+    Argumentos:
+    ---
+	- lines: lista de dicionários. Cada um contém a
+	fonte, o conteúdo, a posição (pixels) e a cor.
+    """
+
+	def __init__(self, lines:list[dict]):
 
 		self.lines = []
 		self.rects = []

@@ -1,12 +1,10 @@
-import sys, os, pygame
+import sys, pygame
 
 import render, sceneManager
 from settings import SETTINGS
 
 
-# Game setup
-base_path = os.getcwd()
-source_path = os.path.join(base_path, "source")
+# Pygame setup
 pygame.init()
 
 SCREEN = pygame.display.set_mode(SETTINGS["SCREEN_SIZE"])
@@ -20,7 +18,7 @@ current_state = None
 
 def main():
 
-	scene_manager = sceneManager.SceneManager(base_path)
+	scene_manager = sceneManager.SceneManager()
 
 	while scene_manager.run:
 
@@ -30,7 +28,8 @@ def main():
 			if event.type == pygame.QUIT:
 				scene_manager.run = False
 
-		scene_manager.runState(source_path, events, layers)
+		# TODO: descentralizar `events`
+		scene_manager.runState(events, layers)
 
 		render.renderScene(SCREEN, layers)
 
