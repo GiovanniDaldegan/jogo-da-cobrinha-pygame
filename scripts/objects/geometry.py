@@ -1,20 +1,46 @@
-import pygame
+from pygame import Vector2, Rect, color
 
 class Line():
-	def __init__(self, color, start, end, width):
+	"""
+	Argumentos:
+	---
+	- color: cor;
+	- start: vetor de início;
+	- end: vetor de fim;
+	- width: grossura.
+	"""
+
+	def __init__(self, _color:color.Color, start:Vector2, end:Vector2, width=2):
 		self.color = color
 		self.start = start
 		self.end = end
 		self.width = width
 
 class Rectangle():
-	def __init__(self, color, topleft, size, width):
-		self.color = color
-		self.rect = pygame.Rect(topleft, size)
+	"""
+	Argumentos:
+	---
+	- color: cor;
+	- topleft: coordenada superior esquerda;
+	- size: vetor com largura e altura;
+	- width: largura do traço.
+	"""
+
+	def __init__(self, _color:color.Color, topleft:Vector2, size:Vector2, width:float):
+		self.color = _color
+		self.rect = Rect(topleft, size)
 		self.width = width
 
 class Circle():
-	def __init__(self, color, pos, radius):
+	"""
+	Argumentos:
+	---
+	- color: cor;
+	- pos: posição central em pixels;
+	- radius: raio.
+	"""
+
+	def __init__(self, _color:color.Color, pos:Vector2, radius:float):
 		self.color = color
 		self.pos = pos
 		self.radius = radius
@@ -22,7 +48,17 @@ class Circle():
 
 # INCOMPLETO
 class Polygon():
-	def __init__(self, vertices, color, pos=(0,0)):
+	"""
+	Polígono arbtrário.
+
+	Argumentos:
+	---
+	- color: cor;
+	- vertices: vetores dos vértices do polígono;
+	- pos: posição central do polítono em pixels.
+	"""
+
+	def __init__(self, _color:color.Color, vertices:list[Vector2], pos:Vector2):
 		super().__init__()
 
 		for v in range(vertices):
